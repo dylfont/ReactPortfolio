@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../style.css';
-import profPhoto from '../../assets/myface.jpg';
+import profPhoto from '../../Assets/myface.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function Contact() {
