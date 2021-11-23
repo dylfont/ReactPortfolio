@@ -15,11 +15,7 @@ function About() {
 			</div>
 			<div>
 				<p>
-				Hi, my name is Bailey and I live in IDallas, TX. I'm currently working on 
-				a certificate in Full Stack Web Development from Southern Methodist 
-				University Coding Boot Camp. Innovative problem-solver who is passionate 
-				about developing apps and features. Strengths in creativity, teamwork, 
-				and building projects from ideation to execution.
+				Hello and welcome to my portfolio. I am Dylan Fontenot, a college graduate and business operations professional seeking a career transition to software development. I chose to pursue software development for its rapidly evolving environment in order to gain hard tech skills and adapt to a changing world. I am currently in the process of earning a full stack developer certificate from Southern Methodist University. I invite you to look at my work and contact me by referencing the provided links.
 				</p>
 			</div>
 		</section>
