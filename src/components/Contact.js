@@ -1,35 +1,97 @@
-import React from 'react';
-import '../../style.css';
-import profPhoto from '../../Assets/myface.jpg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { useState } from "react";
+import { validateEmail } from "../utils/helpers";
 
-export default function Contact() {
-return (
-<div>
-<section id="contact" className="hero is-fullheight">
-                <div className="contact-grid content-box" id="contact-box">
-                    <div className="block tile contact-item">
-                        <p></p>
-                    </div> 
-                    <div className="block tile contact-item">
-                        <h3 className="title is-3">I'd love to work with you! Contact me for more info:</h3>
-                    </div> 
-                    <div className="block tile contact-item">
-                        <h4><a href="mailto:dylanfontenot@protonmail.com">dylanfontenot@protonmail.com</a></h4>
-                    </div> 
-                    <div className="block tile contact-item">
-                        <h4>Add me on <a href="https://www.linkedin.com/in/dylan-fontenot-248a67213/" target="_blank">LinkedIn</a></h4>
-                    </div>
-                    <div className="block tile contact-item">
-                        <h4>Find me on <a href="https://github.com/dylfont" target="_blank">Github</a></h4>
-                    </div>
-                    <div className="block tile contact-item">
-                        <figure className="level-item image is-16by16">
-                            <img src={profPhoto} alt="profile photo" className="is-rounded" id="profile-photo" />
-                        </figure>
-                    </div>
-                </div>        
-    </section>
-</div>
-)
+function Contact() {
+	const [formState, setFormState] = useState({
+		name: "",
+		email: "",
+		message: "",
+	});
+
+	const [errorMessage, setErrorMessage] = useState("");
+
+	const { name, email, message } = formState;
+
+	function handleChange(e) {
+		if (e.target.name === "email") {
+			const isValid = validateEmail(e.target.value);
+			if (!isValid) {
+				setErrorMessage("Your email is invalid.");
+			} else {
+				if (!e.target.value.length) {
+					setErrorMessage(`${e.target.name} is required.`);
+				} else {
+					setErrorMessage("");
+				}
+			}
+		}
+
+		if (!errorMessage) {
+			setFormState({ ...formState, [e.target.name]: e.target.value });
+		}
+	}
+
+	function handleBlank(e) {
+		if (e.target.name === "Name" || e.target.name === "Message") {
+			if (!e.target.value.length) {
+				setErrorMessage(`${e.target.name} is required.`);
+			} else {
+				setErrorMessage("");
+			}
+		}
+
+		if (!errorMessage) {
+			setFormState({ ...formState, [e.target.name]: e.target.value });
+		}
+	}
+
+	return (
+		<section>
+			<div className="center">
+				<h2 className="page-header">Contact Me</h2>
+			</div>
+			<div>
+				<form id="contact-form">
+					<div>
+						<label htmlFor="Name">Name:</label>
+						<br></br>
+						<input
+							type="text"
+							defaultValue={name}
+							onBlur={handleBlank}
+							name="Name"
+						/>
+					</div>
+					<div>
+						<label htmlFor="email">Email address:</label>
+						<br></br>
+						<input
+							type="email"
+							defaultValue={email}
+							name="email"
+							onBlur={handleChange}
+						/>
+					</div>
+					<div>
+						<label htmlFor="Message">Message:</label>
+						<br></br>
+						<textarea
+							name="Message"
+							defaultValue={message}
+							onBlur={handleBlank}
+							rows="5"
+						/>
+					</div>
+					{errorMessage && (
+						<div>
+							<p className="error-text">{errorMessage}</p>
+						</div>
+					)}
+					<button type="submit">Submit</button>
+				</form>
+			</div>
+		</section>
+	);
 }
+
+export default Contact;
